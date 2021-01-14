@@ -1,16 +1,13 @@
-# Title
-## Header 2
+# Home
 
-**Bold** _Italic_ `print("Hello World!")`
- 
- - first unordered item
- - second unordered item
-
-
+Posts
 <ul>
   {% for post in site.posts %}
     <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
+      <span>{{post.date | date: "%b %-d, %Y"}}</span>
+      <h2>
+      	<a href="{{ post.url }}">{{ post.title }}</a>
+  	  </h2>
     </li>
   {% endfor %}
 </ul>
