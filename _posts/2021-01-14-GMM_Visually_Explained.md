@@ -3,6 +3,7 @@ layout: post
 title:  "Gaussian Mixture Models Visually Explained"
 author: Anastasia Kireeva
 tags: [ GMM, EM Algorithm ]
+permalink: GMM_visually_explained
 ---
 
 ## Introduction
@@ -106,26 +107,32 @@ It is a good exercise to implement the EM algorithm for GMM from scratch to chec
 
 First, importing libraries and setting `matplotlib` parameters up: 
 
-```from sklearn.mixture import GaussianMixture
+```
+from sklearn.mixture import GaussianMixture
 from sklearn.datasets import make_blobs
 import matplotlib.pyplot as plt
 import matplotlib
 %matplotlib inline
 random_seed = 13
 scatter_params = {'s': 15, 'alpha': .7}
-matplotlib.rcParams['figure.figsize'] = (5, 5)```
+matplotlib.rcParams['figure.figsize'] = (5, 5)
+```
 
 I used simulated data for simplicity and visual clarity. 
 
-```n_samples = 1000
+```
+n_samples = 1000
 X, y = make_blobs(n_samples=n_samples, centers=3, cluster_std=[1.5, 0.8, 2.5], random_state=random_seed)
-plt.scatter(X[:, 0], X[:, 1], c=y, **scatter_params)```
+plt.scatter(X[:, 0], X[:, 1], c=y, **scatter_params)
+```
 
 
 The `GaussianMixture()` function creates an object, which we then fit to the data to learn the parameters. 
 
-```gmm = GaussianMixture(n_components=3)
-gmm.fit(X)```
+```
+gmm = GaussianMixture(n_components=3)
+gmm.fit(X)
+```
 
 As was mentioned before, the EM algorithm depends on initialization. In sklearn implementation, results of K-means clustering are used by default for initialization. Another option is setting `init_params=‘random’`. In this case, responsibilities are initialized randomly using uniform distribution. However, this might lead to non-stable results. 
 
@@ -133,16 +140,20 @@ Furthermore, sklearn implementation also allows for regularization, e.g., using 
 
 Once we have trained the model, we are ready to make an inference. The fitted GMM object has two options for this task: `predict` and `predict_proba`. The first one returns a list of most probable classes of a passed list of points, and the latter returns probabilities of points belonging to a class. 
 
-```plt.scatter(X[:, 0], X[:, 1], c=gmm.predict(X), **scatter_params)```
+```
+plt.scatter(X[:, 0], X[:, 1], c=gmm.predict(X), **scatter_params)
+```
 
 GMM is a generative model, which means that it can generate new data. 
 
-```X_sample, y_sample = gmm.sample(300)
-plt.scatter(X_sample[:, 0], X_sample[:, 1], c=y_sample, **scatter_params)```
+```
+X_sample, y_sample = gmm.sample(300)
+plt.scatter(X_sample[:, 0], X_sample[:, 1], c=y_sample, **scatter_params)
+```
 
 Finally, we can use attributes `means_`, `covariances_`, `weights_` to check the model parameters.
 
-Summary
+## Summary
 
 *Why?*
 
