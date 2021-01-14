@@ -17,7 +17,7 @@ The Gaussian Mixture Model is a generative model that assumes the data is distri
 
 ## Gaussian Mixture
 
-The Gaussian Mixture Model defines a probability distribution on the data of the specific form — the mixture of Gaussians. Though you may rightly ask, “What is the Gaussian mixture exactly?” Gaussian mixture distribution is a linear superposition of m Gaussian components. This is not to be confused with a sum of random variables distributed as Gaussians — this sum is distributed as Gaussian too. Here we sum up not the _random variables_, but *probability density functions* with weight coefficients which summing up to 1. 
+The Gaussian Mixture Model defines a probability distribution on the data of the specific form — the mixture of Gaussians. Though you may rightly ask, “What is the Gaussian mixture exactly?” Gaussian mixture distribution is a linear superposition of m Gaussian components. This is not to be confused with a sum of random variables distributed as Gaussians — this sum is distributed as Gaussian too. Here we sum up not the _random variables_, but **probability density functions** with weight coefficients which summing up to 1. 
 
 ![Gaussian Mixture definition](/assets/GM_definition.png)
 
@@ -27,14 +27,14 @@ To get a better intuition of this, let’s consider the simplest example; when o
 
 ![Gaussian Mixture pdf animation](/assets/GM_pdf.gif)
 
-*How to Sample?*
+**How to Sample?**
 
 We defined this distribution as a combination of multiple Gaussian probability density functions. Equivalently, we can define it as a result of the following sampling procedure. 
 
 We first choose a component, and then sample a random variable from the chosen component. In more detail this might look like this: 
 
-1. Draw a sample from Cat(pi), which means we choose some i with probability p_i
-2. Draw a sample from i-th component, which is from N(mu_i, Sigma_i)
+1. Draw a sample from *Cat(pi)*, which means we choose some *i* with probability *p_i*
+2. Draw a sample from *i*-th component, which is from *N(mu_i, Sigma_i)*
 
 The sampling procedure is shown in the animation below. The right subplot shows iteratively how many samples are chosen from each component. The resulting histogram is close to the barplot of the weights of components. The left subplot shows the samples drawn from the respective component’s Gaussian distribution. The components contain a different number of points. For example, the upper one (in histogram component 1) contains the least points. 
 
@@ -46,7 +46,7 @@ Now imagine we know (or at least assume) the data is generated from the Gaussian
 
 ![Gaussian Mixture Model Log-Likelihood](/assets/GMM_ll.png)
 
-If we had only one component (that would be just a Gaussian distribution) we could take a log. (a gentle reminder: logarithm of the product is just a sum log(ab) = log(a) + lob(b) for a, b > 0). When we do this the exponent would disappear. Then we take a derivative, set it to zero, and the problem is solved (of course, we noticed that the log-likelihood is concave; hence, the solution is a maximizer).
+If we had only one component (that would be just a Gaussian distribution) we could take a log. (a gentle reminder: logarithm of the product is just a sum *log(ab) = log(a) + lob(b)* for *a, b > 0*). When we do this the exponent would disappear. Then we take a derivative, set it to zero, and the problem is solved (of course, we noticed that the log-likelihood is concave; hence, the solution is a maximizer).
 
 ![Gaussian Mixture Model Log-Likelihood for one component](/assets/GMM_one_comp_LL.png)
 
@@ -100,32 +100,32 @@ The maximizers now can be found by setting derivatives to zero and have the foll
 
 The EM algorithm monotonically increases log-likelihood and converges to local maximum. However, this algorithm depends on initialization and is not guaranteed to find the global likelihood maximizer. 
 
-Practice
+## Practice
 
 It is a good exercise to implement the EM algorithm for GMM from scratch to check and deepen your understanding. But here, I want to give a quick overview of sklearn implementation usage.
 
 First, importing libraries and setting `matplotlib` parameters up: 
 
-`from sklearn.mixture import GaussianMixture
+```from sklearn.mixture import GaussianMixture
 from sklearn.datasets import make_blobs
 import matplotlib.pyplot as plt
 import matplotlib
 %matplotlib inline
 random_seed = 13
 scatter_params = {'s': 15, 'alpha': .7}
-matplotlib.rcParams['figure.figsize'] = (5, 5)`
+matplotlib.rcParams['figure.figsize'] = (5, 5)```
 
 I used simulated data for simplicity and visual clarity. 
 
-`n_samples = 1000
+```n_samples = 1000
 X, y = make_blobs(n_samples=n_samples, centers=3, cluster_std=[1.5, 0.8, 2.5], random_state=random_seed)
-plt.scatter(X[:, 0], X[:, 1], c=y, **scatter_params)`
+plt.scatter(X[:, 0], X[:, 1], c=y, **scatter_params)```
 
 
-The GaussianMixture() function creates an object, which we then fit to the data to learn the parameters. 
+The `GaussianMixture()` function creates an object, which we then fit to the data to learn the parameters. 
 
-`gmm = GaussianMixture(n_components=3)
-gmm.fit(X)`
+```gmm = GaussianMixture(n_components=3)
+gmm.fit(X)```
 
 As was mentioned before, the EM algorithm depends on initialization. In sklearn implementation, results of K-means clustering are used by default for initialization. Another option is setting `init_params=‘random’`. In this case, responsibilities are initialized randomly using uniform distribution. However, this might lead to non-stable results. 
 
@@ -133,26 +133,32 @@ Furthermore, sklearn implementation also allows for regularization, e.g., using 
 
 Once we have trained the model, we are ready to make an inference. The fitted GMM object has two options for this task: `predict` and `predict_proba`. The first one returns a list of most probable classes of a passed list of points, and the latter returns probabilities of points belonging to a class. 
 
-`plt.scatter(X[:, 0], X[:, 1], c=gmm.predict(X), **scatter_params)`
+```plt.scatter(X[:, 0], X[:, 1], c=gmm.predict(X), **scatter_params)```
 
 GMM is a generative model, which means that it can generate new data. 
 
-`X_sample, y_sample = gmm.sample(300)
-plt.scatter(X_sample[:, 0], X_sample[:, 1], c=y_sample, **scatter_params)`
+```X_sample, y_sample = gmm.sample(300)
+plt.scatter(X_sample[:, 0], X_sample[:, 1], c=y_sample, **scatter_params)```
 
 Finally, we can use attributes `means_`, `covariances_`, `weights_` to check the model parameters.
 
 Summary
+
 *Why?*
+
 - Density estimation
 - Clustering
+
 *Advantages*
+
 - Soft clustering
 - Clustering: Captures non-spherical cluster distributions
 - Density estimation: Captures multimodal distribution
 - EM algorithm for GMM always converges and often works well
+
 *Disadvantages*
+
 - Requires defining number of clusters
 - EM algorithm is dependent on initialization 
 
-All animations were created with Python (check my [gmm_visualisation](github.com/aabkn/gmm_visualization) repository if you want to see the implementation). The drawings I made in Procreate. 
+All animations were created with Python (check my [gmm_visualisation](https://github.com/aabkn/gmm_visualization) repository if you want to see the implementation). The drawings I made in Procreate. 
