@@ -105,6 +105,8 @@ The EM algorithm monotonically increases log-likelihood and converges to local m
 
 It is a good exercise to implement the EM algorithm for GMM from scratch to check and deepen your understanding. But here, I want to give a quick overview of sklearn implementation usage.
 
+*You can find the full notebook at my [gmm_visualisation](https://github.com/aabkn/gmm_visualization/blob/master/GMM%20with%20sklearn.ipynb) repository.*
+
 First, importing libraries and setting `matplotlib` parameters up: 
 
 ```
@@ -125,7 +127,7 @@ n_samples = 1000
 X, y = make_blobs(n_samples=n_samples, centers=3, cluster_std=[1.5, 0.8, 2.5], random_state=random_seed)
 plt.scatter(X[:, 0], X[:, 1], c=y, **scatter_params)
 ```
-
+![Simulating the data](/assets/simulate_data.png)
 
 The `GaussianMixture()` function creates an object, which we then fit to the data to learn the parameters. 
 
@@ -143,6 +145,7 @@ Once we have trained the model, we are ready to make an inference. The fitted GM
 ```
 plt.scatter(X[:, 0], X[:, 1], c=gmm.predict(X), **scatter_params)
 ```
+![Predicting clusters](/assets/predict.png)
 
 GMM is a generative model, which means that it can generate new data. 
 
@@ -150,6 +153,7 @@ GMM is a generative model, which means that it can generate new data.
 X_sample, y_sample = gmm.sample(300)
 plt.scatter(X_sample[:, 0], X_sample[:, 1], c=y_sample, **scatter_params)
 ```
+![Sampling the data](/assets/sample.png)
 
 Finally, we can use attributes `means_`, `covariances_`, `weights_` to check the model parameters.
 
@@ -172,4 +176,4 @@ Finally, we can use attributes `means_`, `covariances_`, `weights_` to check the
 - Requires defining number of clusters
 - EM algorithm is dependent on initialization 
 
-All animations were created with Python (check my [gmm_visualisation](https://github.com/aabkn/gmm_visualization) repository if you want to see the implementation). The drawings I made in Procreate. 
+All animations were made with Python (check my [gmm_visualisation](https://github.com/aabkn/gmm_visualization) repository if you want to see the implementation). The drawings I created in Procreate. 
