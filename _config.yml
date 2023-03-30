@@ -1,3 +1,5 @@
 theme: jekyll-theme-minimal
-title: Anastasia Kireeva's blog
-description: Blog on Data Science and Machine Learning topics with a lot of visualization.
+title: Anastasia Kireeva
+logo: /assets/photo.jpg
+description: PhD student, ETH Zurich
+markdown: kramdown
