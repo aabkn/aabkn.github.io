@@ -20,11 +20,15 @@ Here is link to my full [cv](/files/CV_Kireeva.pdf).
 
 <ul>
   <li>
-  <h4>Spring semester of 2023</h4> Teaching assistant -- Mathematics of Signals, Networks, and Learning Category
+  Spring semester of 2023
+
+  Teaching assistant - Mathematics of Signals, Networks, and Learning Category
   </li>
 
   <li>
-  <h4>Autumn semester of 2022</h4> Teaching assistant -- Mathematics of Data Science
+  Autumn semester of 2022
+
+   Teaching assistant - Mathematics of Data Science
   </li>
 </ul>
 
