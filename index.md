@@ -2,17 +2,20 @@
 
 I am a first-year PhD student at ETH Zurich working with Prof. Afonso Bandeira at Mathematics Department.
 My research interests include
-high-dimensional statistics, computational complexity, statistical physics, and stochatic optimization.
+high-dimensional statistics, computational complexity, statistical physics, and stochastic optimization.
 In particular, I work on understanding of phase transitions and
 computational hardness of statistical inference.
 
-Here is link to my full [cv](/files/CV_Kireeva.pdf).
+Here is a link to my full [cv](/files/CV_Kireeva.pdf).
 
 # Publications
 <ul>
   <li> Ilyas Fatkhullin, Anas Barakat, Anastasia Kireeva, Niao He (2023)
   <a href="https://arxiv.org/abs/2302.01734.pdf">Stochastic Policy Gradient Methods:
   Improved Sample Complexity for Fisher-non-degenerate Policies</a>
+  </li>
+  <li> Anastasia Kireeva, Jean-Christophe Mourrat (2023)
+  <a href="http://arxiv.org/abs/2304.05129">Breakdown of a concavity property of mutual information for non-Gaussian channels</a>
   </li>
 </ul>
 
