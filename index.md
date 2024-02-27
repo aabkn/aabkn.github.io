@@ -1,12 +1,12 @@
 # About me
 
-I am a first-year PhD student at ETH Zurich working with Prof. Afonso Bandeira at Mathematics Department.
+I am a second-year PhD student at ETH Zurich working with Prof. Afonso Bandeira at Mathematics Department.
 My research interests include
 high-dimensional statistics, computational complexity, statistical physics, and stochastic optimization.
 In particular, I work on understanding of phase transitions and
 computational hardness of statistical inference.
 
-Here is a link to my full [cv](/files/CV_Kireeva.pdf).
+Here is a link to my full [CV](/files/CV_Kireeva.pdf).
 
 # Publications
 <ul>
@@ -22,6 +22,11 @@ Here is a link to my full [cv](/files/CV_Kireeva.pdf).
 # Teaching
 
 <ul>
+  <li>
+  Autumn semester of 2023
+
+  Course Coordinator - Mathematics of Data Science
+  </li>
   <li>
   Spring semester of 2023
 
