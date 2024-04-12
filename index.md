@@ -6,7 +6,7 @@ high-dimensional statistics, computational complexity, statistical physics, and 
 In particular, I work on understanding of phase transitions and
 computational hardness of statistical inference.
 
-Here is a link to my full [CV](/files/CV_Kireeva.pdf).
+Here is a link to my full [CV](/files/CV_Apr24_Kireeva.pdf).
 
 # Publications
 <ul>
@@ -15,10 +15,12 @@ Here is a link to my full [CV](/files/CV_Kireeva.pdf).
   </li>
   <li> Ilyas Fatkhullin, Anas Barakat, Anastasia Kireeva, Niao He (2023)
   <a href="https://arxiv.org/abs/2302.01734.pdf">Stochastic Policy Gradient Methods:
-  Improved Sample Complexity for Fisher-non-degenerate Policies</a>
+  Improved Sample Complexity for Fisher-non-degenerate Policies </a>
+  In: *International Conference on Machine Learning*. PMLR, pp. 9827–9869
   </li>
   <li> Anastasia Kireeva, Jean-Christophe Mourrat (2023)
-  <a href="http://arxiv.org/abs/2304.05129">Breakdown of a concavity property of mutual information for non-Gaussian channels</a>
+  <a href="http://arxiv.org/abs/2304.05129">Breakdown of a concavity property of mutual information for non-Gaussian channels </a>
+  In: *Information and Inference: A Journal of the IMA* 13.2
   </li>
 </ul>
 
