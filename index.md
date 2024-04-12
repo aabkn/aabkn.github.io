@@ -16,11 +16,11 @@ Here is a link to my full [CV](/files/CV_Apr24_Kireeva.pdf).
   <li> Ilyas Fatkhullin, Anas Barakat, Anastasia Kireeva, Niao He (2023)
   <a href="https://arxiv.org/abs/2302.01734.pdf">Stochastic Policy Gradient Methods:
   Improved Sample Complexity for Fisher-non-degenerate Policies </a>
-  In: _International Conference on Machine Learning._ PMLR, pp. 9827–9869
+  In: International Conference on Machine Learning. PMLR, pp. 9827–9869
   </li>
   <li> Anastasia Kireeva, Jean-Christophe Mourrat (2023)
   <a href="http://arxiv.org/abs/2304.05129">Breakdown of a concavity property of mutual information for non-Gaussian channels </a>
-  In: _Information and Inference: A Journal of the IMA_ 13.2
+  In: Information and Inference: A Journal of the IMA 13.2
   </li>
 </ul>
 
