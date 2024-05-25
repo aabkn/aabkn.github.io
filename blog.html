@@ -1,0 +1,46 @@
+---
+permalink: blog
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Blog</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>Blog</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id='posts'>
+                {% for post in site.posts %}
+                    <div class='post'>
+                        <p class='post-title'>
+                            <a href="{{ post.url }}">
+                                {{ post.title }}
+                            </a>
+                        </p>
+                        <p class='post-tags'>
+                            {{ post.tags | join: ', '}}
+                        </p>
+                        <p class='post-date'>
+                            {{ post.date | date: "%d %B %Y" }}
+                        </p>
+                    </div><br>
+                {% endfor %}
+                </section>
+                
+            
+        </main>
+    </div>
+</body>
+</html>

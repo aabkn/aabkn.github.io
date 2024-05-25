@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Blog</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href='/css/trac.css' rel='stylesheet'/>
+
+    {% include mathjax.html %}
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>Blog</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="post-info">
+            <h1 class="post-title">
+                {{ page.title }}
+            </h1>
+            <p class='post-date'>
+                Published: {{ page.date | date: "%d %B %Y" }}
+            </p>
+            <p class='post-tags'>
+                Tags: {{ page.tags | join: ', '}}
+            </p>
+        </div>
+        <section class="post-content">
+            {{ content }}
+        </section>
+    </div>
+</body>
+</html>

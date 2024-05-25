@@ -2,7 +2,7 @@
 layout: post
 title:  "Gaussian Mixture Models Visually Explained"
 author: Anastasia Kireeva
-tags: [ GMM, EM Algorithm ]
+tags: [ EM Algorithm, clustering ]
 permalink: GMM_visually_explained
 usemathjax: true
 ---
@@ -48,7 +48,7 @@ We first choose a component, and then sample a random variable from the chosen c
 
 The sampling procedure is shown in the animation below. The right subplot shows iteratively how many samples are chosen from each component. The resulting histogram is close to the barplot of the weights of components. The left subplot shows the samples drawn from the respective component’s Gaussian distribution. The components contain a different number of points. For example, the upper one (in histogram component 1) contains the least points.
 
-![Gaussian Mixture Sampling](/assets/GM_sampling.gif)
+![Gaussian Mixture Sampling](/assets/GM_sampling.gif){:width="100%"}
 
 ## Gaussian Mixture Model
 
@@ -83,7 +83,8 @@ Before we deep dive into the EM algorithm details, I’d like to remind you that
 
 To get further intuition on this, let’s consider an example. Imagine that centers of K clusters are kindergarten teachers looking after points under their responsibility. The teacher’s responsibility for a point depends on the point location, their location (mu), the area they frequently check (zone of responsibility, Sigma), their commitment (pi), and the same parameters of other teachers. The responsibility may be shared between teachers (for example, if a point is between two centers), but the responsibilities for a point of all teachers should sum up to 1. In other words, every point needs to be fully taken care of.
 
-![EM Algorithm Illustration Initial State](/assets/Kindergarten_init.png)
+{:.center}
+![EM Algorithm Illustration Initial State](/assets/Kindergarten_init.png){:width="70%"}
 
 The contours around the teachers are level lines indicating how well they look after points on that line. The further the contour, the more difficult is to check on that location.
 
@@ -91,11 +92,11 @@ The goal is to find locations, zones of responsibility, and teachers' commitment
 
 The teachers can easily compute their responsibility for all points using the current parameters of all teachers (expectation step).
 
-![EM Algorithm Illustration Responsibilities Computation](/assets/Kindergarten_resp.png)
+![EM Algorithm Illustration Responsibilities Computation](/assets/Kindergarten_resp.png){:width="70%"}
 
 Then they change the location and their zone of responsibility to better look after the points under their responsibility, moving closer to the points they are mainly responsible for and accounting with lower weight for points they have shared responsibility for (maximization step). Also, their commitment grows with the overall current responsibility.
 
-![EM Algorithm Illustration Responsibilities Computation](/assets/Kindergarten_after_EM.png)
+![EM Algorithm Illustration Responsibilities Computation](/assets/Kindergarten_after_EM.png){:width="70%"}
 
 *Important point*: Even if their responsibility for a point is the lowest among all other teachers (for example 0.2 and 0.8 for another teacher) they still account for it. The objective that they maximize is a weighted version of the log-likelihood with responsibilities acting as weights. The lower the responsibility, the less the respective summand. Hence the lower effect on the parameters of the cluster with low responsibility.
 
