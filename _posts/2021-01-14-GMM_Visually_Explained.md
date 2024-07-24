@@ -15,13 +15,11 @@ One way to exploit the nice properties of normal distributions for such multimod
 
 The Gaussian Mixture Model is a generative model that assumes the data is distributed as a Gaussian mixture. It can be used for density estimation and clustering. But, first things first.
 
-![Density estimation with GMM](/assets/density_estimation.gif)
+![Density estimation with GMM](/assets/GMM/density_estimation.gif)
 
 ## Gaussian Mixture
 
 The Gaussian Mixture Model defines a probability distribution on the data of the specific form — the mixture of Gaussians. Though you may rightly ask, “What is the Gaussian mixture exactly?” Gaussian mixture distribution is a linear superposition of m Gaussian components. This is not to be confused with a sum of random variables distributed as Gaussians — this sum is distributed as Gaussian too. Here we sum up not the _random variables_, but **probability density functions** with weight coefficients which summing up to 1.
-
-<!-- ![Gaussian Mixture definition](/assets/GM_definition.png) -->
 
 $$
 \begin{align*}
@@ -35,7 +33,7 @@ This way we obtain the distribution which comprises of multiple Gaussian compone
 
 To get a better intuition of this, let’s consider the simplest example; when one coefficient is one and all others are zero. In this case, the resulting distribution would be just Gaussian with respective mean and covariance. In a non-degenerative case, the resulting distribution captures all components to some extent. In the figure below, you can see how the resulting distribution changes depending on the value of the mixture parameter.
 
-![Gaussian Mixture pdf animation](/assets/GM_pdf.gif)
+![Gaussian Mixture pdf animation](/assets/GMM/GM_pdf.gif)
 
 **How to Sample?**
 
@@ -48,13 +46,11 @@ We first choose a component, and then sample a random variable from the chosen c
 
 The sampling procedure is shown in the animation below. The right subplot shows iteratively how many samples are chosen from each component. The resulting histogram is close to the barplot of the weights of components. The left subplot shows the samples drawn from the respective component’s Gaussian distribution. The components contain a different number of points. For example, the upper one (in histogram component 1) contains the least points.
 
-![Gaussian Mixture Sampling](/assets/GM_sampling.gif){:width="100%"}
+![Gaussian Mixture Sampling](/assets/GMM/GM_sampling.gif){:width="100%"}
 
 ## Gaussian Mixture Model
 
 Now imagine we know (or at least assume) the data is generated from the Gaussian mixture. However, the parameters of the distribution remain unknown. How do we learn the parameters? As often in machine learning models, this is done via likelihood maximization (or equivalently, negative log-likelihood minimization).
-
-<!--![Gaussian Mixture Model Log-Likelihood](/assets/GMM_ll.png)-->
 
 $$
 \begin{gathered}
@@ -84,7 +80,7 @@ Before we deep dive into the EM algorithm details, I’d like to remind you that
 To get further intuition on this, let’s consider an example. Imagine that centers of K clusters are kindergarten teachers looking after points under their responsibility. The teacher’s responsibility for a point depends on the point location, their location (mu), the area they frequently check (zone of responsibility, Sigma), their commitment (pi), and the same parameters of other teachers. The responsibility may be shared between teachers (for example, if a point is between two centers), but the responsibilities for a point of all teachers should sum up to 1. In other words, every point needs to be fully taken care of.
 
 {:.center}
-![EM Algorithm Illustration Initial State](/assets/Kindergarten_init.png){:width="70%"}
+![EM Algorithm Illustration Initial State](/assets/GMM/Kindergarten_init.png){:width="70%"}
 
 The contours around the teachers are level lines indicating how well they look after points on that line. The further the contour, the more difficult is to check on that location.
 
@@ -92,11 +88,11 @@ The goal is to find locations, zones of responsibility, and teachers' commitment
 
 The teachers can easily compute their responsibility for all points using the current parameters of all teachers (expectation step).
 
-![EM Algorithm Illustration Responsibilities Computation](/assets/Kindergarten_resp.png){:width="70%"}
+![EM Algorithm Illustration Responsibilities Computation](/assets/GMM/Kindergarten_resp.png){:width="70%"}
 
 Then they change the location and their zone of responsibility to better look after the points under their responsibility, moving closer to the points they are mainly responsible for and accounting with lower weight for points they have shared responsibility for (maximization step). Also, their commitment grows with the overall current responsibility.
 
-![EM Algorithm Illustration Responsibilities Computation](/assets/Kindergarten_after_EM.png){:width="70%"}
+![EM Algorithm Illustration Responsibilities Computation](/assets/GMM/Kindergarten_after_EM.png){:width="70%"}
 
 *Important point*: Even if their responsibility for a point is the lowest among all other teachers (for example 0.2 and 0.8 for another teacher) they still account for it. The objective that they maximize is a weighted version of the log-likelihood with responsibilities acting as weights. The lower the responsibility, the less the respective summand. Hence the lower effect on the parameters of the cluster with low responsibility.
 
@@ -105,7 +101,7 @@ After changing the parameters, they recalculate their responsibilities and move 
 Now let’s move to the formal description of the EM algorithm.
 
 ### Expectation Step
-On the expectation step, we compute responsibilities. The responsibility r_{ik} is the posterior probability that point i belongs to cluster k. It is calculated using the Bayes’ theorem.
+On the expectation step, we compute responsibilities. The responsibility $r_{ik}$ is the posterior probability that point $i$ belongs to cluster $k$. It is calculated using the Bayes’ theorem.
 
 
 $$
@@ -116,9 +112,9 @@ r_{i k}=p\left(z_i=k \mid \boldsymbol{x}_i, \boldsymbol{\pi}_k, \boldsymbol{\mu}
 $$
 
 ### Maximization Step
-As mentioned before, the log-likelihood cannot be maximized in closed form. However, the problem becomes easy once we have class labels. So let’s introduce latent variables Z, i = 1…n, with Z_i being a class label of point i. If we observed both X and Z we could easily deduce parameters of every Gaussian component by maximizing the log-likelihood. However, in our case Z depends on the parameters. Another consideration is that GMM is a probabilistic model, and even if a point is close to the center of a cluster, it could still arise from another cluster with lower probability. When we make inference, we choose the most probable class of each point, but even under GMM assumptions, it doesn’t mean we chose the ‘true’ class.
+As mentioned before, the log-likelihood cannot be maximized in closed form. However, the problem becomes easy once we have class labels. So let’s introduce latent variables $Z, i = 1, ..., n$, with $Z_i$ being a class label of point $i$. If we observed both $X$ and $Z$ we could easily deduce parameters of every Gaussian component by maximizing the log-likelihood. However, in our case $Z$ depends on the parameters. Another consideration is that GMM is a probabilistic model, and even if a point is close to the center of a cluster, it could still arise from another cluster with lower probability. When we make inference, we choose the most probable class of each point, but even under GMM assumptions, it doesn’t mean we chose the ‘true’ class.
 
-So now we have the log-likelihood function we want to maximize but cannot compute because of unknown Z… Don’t worry; there’s a solution. One way to estimate a quantity containing randomness is to take its expectation. Although we don’t know Z, we have estimates of its distribution – that’s r_ik computed on the expectation step. We can take expectation of log-likelihood with respect to the posterior distribution of cluster assignments.
+So now we have the log-likelihood function we want to maximize but cannot compute because of unknown $Z$... Don’t worry; there’s a solution. One way to estimate a quantity containing randomness is to take its expectation. Although we don’t know Z, we have estimates of its distribution – that’s $r_{ik}$ computed on the expectation step. We can take expectation of log-likelihood with respect to the posterior distribution of cluster assignments.
 
 $$
 \begin{gathered}
@@ -129,7 +125,7 @@ $$
 \end{gathered}
 $$
 
-In the second line, we used that only one indicator z_i = k is one, and all others are zero. Therefore, the product contains only one multiplier referring to the true class. The reason to use a product is that we can take it out of the logarithm and obtain a sum.
+In the second line, we used that only one indicator $z_i = k$ is one, and all others are zero. Therefore, the product contains only one multiplier referring to the true class. The reason to use a product is that we can take it out of the logarithm and obtain a sum.
 
 The maximizers now can be found by setting derivatives to zero and have the following form:
 
@@ -172,7 +168,7 @@ X, y = make_blobs(n_samples=n_samples, centers=3,
 plt.scatter(X[:, 0], X[:, 1], c=y, **scatter_params)
 ```
 
-![Simulating the data](/assets/simulate_data.png)
+![Simulating the data](/assets/GMM/simulate_data.png)
 
 The `GaussianMixture()` function creates an object, which we then fit to the data to learn the parameters.
 
@@ -191,7 +187,7 @@ Once we have trained the model, we are ready to make an inference. The fitted GM
 plt.scatter(X[:, 0], X[:, 1], c=gmm.predict(X),
 	    **scatter_params)
 ```
-![Predicting clusters](/assets/predict.png)
+![Predicting clusters](/assets/GMM/predict.png)
 
 GMM is a generative model, which means that it can generate new data.
 
@@ -200,7 +196,7 @@ X_sample, y_sample = gmm.sample(300)
 plt.scatter(X_sample[:, 0], X_sample[:, 1],
 	    c=y_sample, **scatter_params)
 ```
-![Sampling the data](/assets/sample.png)
+![Sampling the data](/assets/GMM/sample.png)
 
 Finally, we can use attributes `means_`, `covariances_`, `weights_` to check the model parameters.
 

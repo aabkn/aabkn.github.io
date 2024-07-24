@@ -1,3 +1,8 @@
 title: Anastasia Kireeva
 description: PhD student, ETH Zurich
 markdown: kramdown
+plugins:
+  - jekyll-pseudocode-b
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag

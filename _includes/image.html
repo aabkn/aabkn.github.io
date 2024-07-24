@@ -1,0 +1,23 @@
+<!-- _includes/image.html -->
+<figure id="{{ include.id }}">
+    {% if include.url %}
+    <a href="{{ include.url }}">
+    {% endif %}
+    <img
+        {% if include.srcabs %}
+            src="{{ include.srcabs }}"
+        {% else %}
+            src="{{ site.baseurl }}/assets/{{ include.src }}"
+        {% endif %}
+        alt="{{ include.alt }}"
+        {% if include.width %}
+            style="width: {{ include.width }};"
+        {% endif %}
+    >
+    {% if include.url %}
+    </a>
+    {% endif %}
+    {% if include.caption %}
+        <figcaption>{{ include.caption | markdownify }}</figcaption>
+    {% endif %}
+</figure>

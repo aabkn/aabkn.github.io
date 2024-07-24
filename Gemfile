@@ -10,3 +10,11 @@ gem 'jekyll-theme-minimal', '~> 0.2.0'
 
 # gem "rails"
 gem "webrick", "~> 1.7"
+
+gem 'jekyll-pseudocode-b'
+
+group :jekyll_plugins do
+    gem "jekyll-sitemap"
+    gem "jekyll-feed"
+    gem "jekyll-seo-tag"
+  end
